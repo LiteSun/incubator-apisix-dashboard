@@ -1,3 +1,4 @@
+<!--
 #
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
@@ -14,14 +15,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# If you want to set the specified configuration value, you can set the new
-# in this file. For example if you want to specify the etcd address:
-#
+-->
 
-etcd:
-  host:
-    - 'http://etcd:2379'
+# Dashboard 开发
 
-apisix:
-  allow_admin: # http://nginx.org/en/docs/http/ngx_http_access_module.html#allow
-    - 0.0.0.0/0 # If we don't set any IP list, then any IP access is allowed by default.
+## 前端开发
+
+1. 确保你的设备已经安装了 `Node.js(version version 10.0.0+)`。
+
+2. 安装 [yarn](https://yarnpkg.com/)。
+
+3. 安装依赖:
+
+```sh
+$ yarn install
+```
+
+4. 若需要修改 manager-api 地址，请访问 `config/proxy.ts` 文件。
+
+5. 启动开发模式
+
+```sh
+$ yarn start
+```
+
+## manager-api 开发
+
+待补充

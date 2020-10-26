@@ -24,7 +24,7 @@ RUN mkdir -p /go/manager-api \
     && go env -w GOPROXY=https://goproxy.io,direct \
     && export GOPROXY=https://goproxy.io \
     && go build -o /go/manager-api/manager-api \
-    && mv /go/src/github.com/apisix/manager-api/build.sh /go/manager-api/ \
+    && mv /go/src/github.com/apisix/manager-api/entry.sh /go/manager-api/ \
     && mv /go/src/github.com/apisix/manager-api/build-tools/* /go/manager-api/build-tools/ \
     && mv /go/src/github.com/apisix/manager-api/conf/conf_preview.json /go/manager-api/conf.json \
     && rm -rf /go/src/github.com/apisix/manager-api \
@@ -64,7 +64,10 @@ RUN  cd /go/manager-api/build-tools \
      && lua schema-sync.lua > /go/manager-api/schema.json \
      && cd /go/manager-api/ \
      && rm -rf /go/manager-api/build-tools/
+ADD ./dist /go/manager-api
 
 EXPOSE 8080
-RUN chmod +x ./build.sh
-CMD ["/bin/ash", "-c", "/go/manager-api/build.sh"]
+
+RUN chmod +x ./entry.sh
+
+CMD ["/bin/ash", "-c", "/go/manager-api/entry.sh"]

@@ -1,5 +1,5 @@
-#!/bin/sh
-#	
+<!--
+#
 # Licensed to the Apache Software Foundation (ASF) under one or more
 # contributor license agreements.  See the NOTICE file distributed with
 # this work for additional information regarding copyright ownership.
@@ -15,18 +15,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+-->
 
-export ENV=prod
-pwd=`pwd`
+# Dashboard Devlopment
 
-sed -i -e "s%#mysqlAddress#%`echo $MYSQL_SERVER_ADDRESS`%g" ${pwd}/conf.json
-sed -i -e "s%#mysqlUser#%`echo $MYSQL_USER`%g" ${pwd}/conf.json
-sed -i -e "s%#mysqlPWD#%`echo $MYSQL_PASSWORD`%g" ${pwd}/conf.json
-sed -i -e "s%#syslogAddress#%`echo $SYSLOG_HOST`%g" ${pwd}/conf.json
-sed -i -e "s%#apisixBaseUrl#%`echo $APISIX_BASE_URL`%g" ${pwd}/conf.json
-sed -i -e "s%#apisixApiKey#%`echo $APISIX_API_KEY`%g" ${pwd}/conf.json
-sed -i -e "s%#apisixDebugUrl#%`echo $APISIX_DEBUG_URL`%g" ${pwd}/conf.json
+## Frontend
 
-cd /go/manager-api
-exec ./manager-api
+1. Make sure you have `Node.js(version version 10.0.0+)` installed on your machine.
+2. Install [yarn](https://yarnpkg.com/).
+3. Install dependencies:
 
+```sh
+$ yarn install
+```
+
+4. If we want to modify the API, please refer to the `config/proxy.ts` file.
+5. Start the development mode
+
+```sh
+$ yarn start
+```
+
+## manager-api
+
+TODO
