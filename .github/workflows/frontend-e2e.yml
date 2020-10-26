@@ -1,4 +1,4 @@
-name: Test deploy frontend and API using Go
+name: Test front-end e2e
 
 on:
   push:
