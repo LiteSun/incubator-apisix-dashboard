@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 
 describe('Login', () => {
   it('should login with failure', async () => {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     await page.goto('http://localhost:8000');
     await page.type('#control-ref_username', 'admin');
@@ -14,7 +14,7 @@ describe('Login', () => {
   });
 
   it('should login with succcess', async () => {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     await page.goto('http://localhost:8000');
     await page.type('#control-ref_username', 'admin');
