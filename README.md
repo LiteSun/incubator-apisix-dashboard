@@ -53,3 +53,4 @@ See [CONTRIBUTING](./CONTRIBUTING.md) for details on submitting patches and the 
 1. If you need the dashboard-1.0 which is built with Vue.js, please refer to [master-vue](https://github.com/apache/apisix-dashboard/tree/master-vue).
 
 2. The dashboard 2.0 removes MySQL which [dashboard 1.5](https://github.com/apache/apisix-dashboard/tree/backup-1.5-latest) is relied on.
+
