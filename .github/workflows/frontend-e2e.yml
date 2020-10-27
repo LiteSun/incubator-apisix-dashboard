@@ -27,4 +27,4 @@ jobs:
         run: yarn start &
 
       - name: test
-        run: npm test .e2e.js
+        run: npm test Login.e2e.js
