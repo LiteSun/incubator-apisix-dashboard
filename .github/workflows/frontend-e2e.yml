@@ -24,7 +24,7 @@ jobs:
         run: yarn install
 
       - name: start Front-End
-        run: yarn start 
+        run: yarn start &
 
       - name: test
         run: npm test .e2e.js
