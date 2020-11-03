@@ -48,9 +48,6 @@ jobs:
           path: node_modules
           key: node_modules-${{ hashFiles('**/web/yarn.lock') }}
 
-      - name: Install
-        run: yarn install
-
       - name: Start Front-end then test
         run: yarn test:e2e
     needs: setup
