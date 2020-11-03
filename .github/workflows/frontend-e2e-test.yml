@@ -37,7 +37,10 @@ jobs:
         with:
           path: node_modules
           key: node_modules-${{ hashFiles('**/package-temp-dir/yarn.lock') }}
-
+      - name: Setup Node.js environment for Front-end
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
       - name: install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: yarn
@@ -46,15 +49,20 @@ jobs:
     name: Front-end e2e test
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
       - uses: actions/checkout@v2
 
-      - name: Setup Node.js environment for Front-end
-        uses: actions/setup-node@v1
+      - name: restore cache from yarn.lock
+        uses: actions/cache@v2
         with:
-          node-version: 14.x
+          path: package-temp-dir
+          key: lock-${{ github.sha }}
 
-      - name: Install Front-end dependencies
-        run: yarn install
+      - name: restore cache from node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package-temp-dir/yarn.lock') }}
 
       - name: Start Front-end then test
         run: yarn test:e2e
