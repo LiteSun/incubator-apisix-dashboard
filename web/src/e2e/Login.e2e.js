@@ -59,7 +59,7 @@ describe('Login', () => {
     await page.type(domSelectors.inputUsername, '');
     await page.type(domSelectors.inputPassword, '');
     await page.click(domSelectors.buttonLogin);
-    await page.waitForSelector('.ant-form-item-explain');
+    await page.waitForSelector('.ant-form-item-explainn');
     await page.close();
   }, 10000);
 
