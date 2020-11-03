@@ -24,7 +24,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules-${{ hashFiles('**/yarn.lock') }}
+          key: node_modules-${{ hashFiles('**/web/yarn.lock') }}
           
       - name: Setup Node.js environment
         uses: actions/setup-node@v1
@@ -32,7 +32,7 @@ jobs:
           node-version: 14.x
         
       - name: install
-#         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
+        if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: yarn
 
   web-e2e:
@@ -49,5 +49,7 @@ jobs:
           key: node_modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Start Front-end then test
-        run: yarn test:e2e
+        run: |
+         pwd
+         yarn test:e2e
     needs: setup
