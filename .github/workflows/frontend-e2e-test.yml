@@ -13,6 +13,35 @@ defaults:
     working-directory: web
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: cache yarn.lock
+        uses: actions/cache@v2
+        with:
+          path: package-temp-dir
+          key: lock-${{ github.sha }}
+
+      - name: hack for singe file
+        run: |
+          if [ ! -d "package-temp-dir" ]; then
+            mkdir package-temp-dir
+          fi
+          cp yarn.lock package-temp-dir
+      - name: cache node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
+
+      - name: install
+        if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
+        run: yarn
+        
   web-e2e:
     name: Front-end e2e test
     runs-on: ubuntu-latest
@@ -29,3 +58,4 @@ jobs:
 
       - name: Start Front-end then test
         run: yarn test:e2e
+    needs: setup
