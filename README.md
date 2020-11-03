@@ -17,7 +17,7 @@
 #
 -->
 
-English | [简体中文](./README.zh-CN.md)
+English | [简体中文](./README.zh-CN.md) 
 
 # Apache APISIX Dashboard
 
