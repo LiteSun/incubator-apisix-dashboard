@@ -17,10 +17,10 @@ jobs:
     name: Front-end e2e test
     runs-on: ubuntu-latest
     steps:
-     - name: checkout
+     - name: Checkout
        uses: actions/checkout@v2
-       
-     - name: cache node_modules
+
+     - name: Cache node_modules
        id: node_modules_cache_id
        uses: actions/cache@v2
        with:
@@ -32,7 +32,7 @@ jobs:
        with:
           node-version: 14.x
         
-     - name: install
+     - name: Install dependence
        if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
        run: yarn install
      
