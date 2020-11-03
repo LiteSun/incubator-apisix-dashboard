@@ -36,12 +36,12 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules-${{ hashFiles('**/package-temp-dir/package-lock.json') }}
+          key: node_modules-${{ hashFiles('**/package-temp-dir/yarn.lock') }}
 
       - name: install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: yarn
-        
+
   web-e2e:
     name: Front-end e2e test
     runs-on: ubuntu-latest
