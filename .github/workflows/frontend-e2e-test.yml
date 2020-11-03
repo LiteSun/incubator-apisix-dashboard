@@ -31,16 +31,19 @@ jobs:
             mkdir package-temp-dir
           fi
           cp yarn.lock package-temp-dir
+          
       - name: cache node_modules
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
           path: node_modules
           key: node_modules-${{ hashFiles('**/package-temp-dir/yarn.lock') }}
+          
       - name: Setup Node.js environment for Front-end
         uses: actions/setup-node@v1
         with:
           node-version: 14.x
+        
       - name: install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: yarn
