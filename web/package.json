@@ -31,7 +31,7 @@
     "tsc": "tsc",
     "cypress:open": "CYPRESS_SERVE_ENV=test cypress open",
     "cypress:open-dev": "CYPRESS_SERVE_ENV=dev cypress open",
-    "cypress:run-ci": "CYPRESS_SERVE_ENV=test cypress run"
+    "cypress:run-ci": "CYPRESS_SERVE_ENV=test cypress run --record --key b30aa39b-07d5-475b-b48f-6a32992fe457"
   },
   "license": "Apache-2.0",
   "lint-staged": {
