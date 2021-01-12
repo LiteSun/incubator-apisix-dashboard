@@ -32,7 +32,7 @@ context('Create and Delete Consumer', () => {
   it('creates consumer with key-auth', () => {
     // go to consumer create page
     cy.visit('/');
-    cy.contains('Consumer').click();
+    cy.contains('Consumerxxxx').click();
     cy.wait(sleepTime * 5);
     cy.contains('Create').click();
 
