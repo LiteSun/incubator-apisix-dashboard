@@ -52,4 +52,15 @@ jobs:
         run: yarn test:e2e
 
       - name: Report e2e coverage
-        run: npx nyc report --reporter=text-summary
+        run: |
+          npx nyc report --reporter=text-summary
+          echo ::set-env name=CODECOVERAGE_REPORT::$(npx nyc report --reporter=text-summary)
+
+      - name: Add report comment
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: |
+            ${{env.CODECOVERAGE_REPORT}}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: "github-actions[bot]"
+          allow-repeats: false
