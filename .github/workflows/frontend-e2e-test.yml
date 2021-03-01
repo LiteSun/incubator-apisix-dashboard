@@ -57,4 +57,4 @@ jobs:
 
       - name: Upload coverage to Codecov
         run: |
-         bash <(curl -s https://codecov.io/bash) -F front-end
+         bash <(curl -s https://codecov.io/bash) -f ./coverage/coverage-final.json -F front-end
