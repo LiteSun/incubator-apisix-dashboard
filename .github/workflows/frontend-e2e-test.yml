@@ -54,6 +54,7 @@ jobs:
       - name: Report e2e coverage
         run: |
           npx nyc report --reporter=text-summary
-          
+
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        run: |
+         bash <(curl -s https://codecov.io/bash) -F front-end

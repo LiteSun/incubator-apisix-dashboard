@@ -75,7 +75,7 @@ jobs:
       - name: upload coverage profile
         working-directory: ./api/test/testdata
         run: |
-          bash <(curl -s https://codecov.io/bash) -f ./integrationcover.out
+          bash <(curl -s https://codecov.io/bash) -f ./integrationcover.out -F backend-e2e-test
 
 
   backend-e2e-test-ginkgo:
@@ -130,4 +130,4 @@ jobs:
       - name: upload coverage profile
         working-directory: ./api/test/testdata
         run: |
-          bash <(curl -s https://codecov.io/bash) -f ./integrationcover.out
+          bash <(curl -s https://codecov.io/bash) -f ./integrationcover.out -F backend-e2e-test-ginkgo

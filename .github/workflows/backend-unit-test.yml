@@ -36,7 +36,7 @@ jobs:
       - name: upload coverage profile
         working-directory: ./api
         run: |
-          bash <(curl -s https://codecov.io/bash)
+          bash <(curl -s https://codecov.io/bash) -F backend-unit-test
 
       - name: run with custom port
         working-directory: ./api
