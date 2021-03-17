@@ -60,7 +60,6 @@ jobs:
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
-        if: failure()
         with:
           name: code-coverage-report
           path: web/cypress/
