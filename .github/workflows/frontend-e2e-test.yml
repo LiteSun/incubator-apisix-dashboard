@@ -15,6 +15,7 @@ jobs:
   web-e2e:
     name: Frontend e2e test
     runs-on: ubuntu-latest
+    continue-on-error: true
 
     services:
       etcd:
