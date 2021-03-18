@@ -157,7 +157,7 @@ context('import and export routes', () => {
         cy.get(this.domSelector.notificationCloseIcon).click();
       } else if (file !== 'import-error.txt') {
         cy.get(this.domSelector.notification).should(
-          'contain', 'Success'
+          'contain', 'Successqqqqqq'
         );
         cy.get(this.domSelector.notificationCloseIcon).click().should('not.exist');
         // delete route just imported
