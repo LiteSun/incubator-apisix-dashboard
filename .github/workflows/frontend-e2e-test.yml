@@ -57,7 +57,9 @@ jobs:
 
       - name: Move node_modules to web folder
         if: steps.yarn-cache.outputs.cache-hit == 'true'
-        run: mv -f ../node_modules ../web/node_modules
+        run: |
+         ll
+         mv -f node_modules /web/node_modules
 
       - name: Install dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
