@@ -48,18 +48,18 @@ jobs:
         id: yarn-cache
         with:
           path: '*/node_modules'
-          key: '${{ runner.os }}-yarn-${{ hashFiles(''**/yarn.lock'') }}'
+          key: '${{ runner.os }}-yarn-cache-${{ hashFiles(''**/yarn.lock'') }}'
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-yarn-cache
 
       - name: Cache Cypress binary
         uses: actions/cache@v2
         id: cypress-binary-cache
         with:
           path: ~/.cache/Cypress
-          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
+          key: cypress-${{ runner.os }}-cypress-cache-${{ hashFiles('**/package.json') }}
           restore-keys: |
-            cypress-${{ runner.os }}-cypress-
+            cypress-${{ runner.os }}-cypress-cache
 
       - name: Install dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-binary-cache.outputs.cache-hit != 'true'
