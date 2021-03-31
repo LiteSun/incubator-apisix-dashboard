@@ -62,7 +62,6 @@ jobs:
             cypress-${{ runner.os }}-cypress-
 
       - name: Install dependencies
-        if: ${{ steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-binary-cache.outputs.cache-hit != 'true' }}
         run: yarn
 
       - name: Start frontend then test
