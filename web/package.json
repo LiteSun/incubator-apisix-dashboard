@@ -22,7 +22,7 @@
     "start": "umi dev",
     "start:e2e": "cross-env SERVE_ENV=test umi dev",
     "test:e2e": "start-server-and-test 'cross-env SERVE_ENV=test yarn start' http-get://localhost:8000 cypress:run-ci",
-    "test-plugin:e2e": "start-server-and-test 'cross-env SERVE_ENV=test yarn start' http-get://localhost:8000 cypress:run-ci-plugin",
+    "test-plugin:e2e": "start-server-and-test 'cross-env SERVE_ENV=test yarn start' http-get://localhost:8000 cypress:run-plugin-ci",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev",
     "start:no-mock": "cross-env MOCK=none umi dev",
     "start:no-ui": "cross-env UMI_UI=none umi dev",
