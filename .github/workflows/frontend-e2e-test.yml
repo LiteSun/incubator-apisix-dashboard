@@ -63,7 +63,9 @@ jobs:
 
       - name: Install dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true' || steps.cypress-binary-cache.outputs.cache-hit != 'true'
-        run: yarn
+        run: |
+          rm -rf node_modules
+          yarn
 
       - name: Start frontend then test
         run: |
