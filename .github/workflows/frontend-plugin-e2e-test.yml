@@ -48,18 +48,9 @@ jobs:
       - name: Install front-end dependencies
         run: yarn install
 
-# NOTE: remove cypress/integration/plugin because we test this folder in frontend-plugin-e2e-test ci
-      - name: Start frontend then test
+      - name: Start frontend then test plugin
         run: |
-          rm -rf cypress/integration/plugin
-          yarn test:e2e
-
-      - name: Report e2e coverage
-        run: npx nyc report --reporter=text-summary
-
-      - name: Upload coverage to Codecov
-        run: |
-         bash <(curl -s https://codecov.io/bash) -f ./coverage/coverage-final.json -F frontend-e2e-test
+          yarn test-plugin:e2e
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
