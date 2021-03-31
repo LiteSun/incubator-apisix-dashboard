@@ -1,4 +1,4 @@
-name: Frontend e2e test for plugin
+name: Frontend e2e test
 
 on:
   push:
@@ -12,10 +12,49 @@ defaults:
     working-directory: web
 
 jobs:
+  install:
+      name: Install NPM and Cypress
+      runs-on: ubuntu-18.04
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Setup Node.js environment
+          uses: actions/setup-node@v2.1.5
+          with:
+            node-version: 14.x
+
+        - name: Cache central NPM modules
+          uses: actions/cache@v1
+          with:
+            path: ~/.npm
+            key: ${{ runner.os }}-node-${{ github.ref }}-${{ hashFiles('**/yarn.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-node-${{ github.ref }}-${{ hashFiles('**/yarn.lock') }}
+
+        - name: Cache Cypress binary
+          uses: actions/cache@v1
+          with:
+            path: ~/.cache/Cypress
+            key: cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+            restore-keys: |
+              cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+
+        # Cache local node_modules to pass to testing jobs
+        - name: Cache local node_modules
+          uses: actions/cache@v1
+          with:
+            path: node_modules
+            key: ${{ runner.os }}-node-modules-${{ github.ref }}-${{ hashFiles('**/yarn.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-node-modules-${{ github.ref }}-
+
+        - name: install dependencies and verify Cypress
+          run: yarn install
+
   web-e2e:
     name: Frontend e2e test
     runs-on: ubuntu-latest
-
+    needs: install
     services:
       etcd:
         image: bitnami/etcd:3.4.13
@@ -45,8 +84,22 @@ jobs:
           sed -i 's@# - dubbo-proxy@- dubbo-proxy@' ./conf/conf.yaml
           nohup go run ./cmd/manager &
 
-      - name: Install front-end dependencies
-        run: yarn install
+      # Restore just local node_modules and the Cypress binary archives.
+      - name: Cache Cypress binary
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+
+      - name: Cache local node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ github.ref }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-${{ github.ref }}-
 
       # NOTE: remove cypress/integration/plugin because we test this folder in frontend-plugin-e2e-test ci
       - name: Start frontend then test
