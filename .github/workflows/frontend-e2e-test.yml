@@ -50,7 +50,7 @@ jobs:
           key: '${{ runner.os }}-yarn-${{ hashFiles(''**/yarn.lock'') }}'
           restore-keys: |
             ${{ runner.os }}-yarn-
-            
+
       - name: Cache Cypress binary
         uses: actions/cache@v1
         with:
@@ -60,7 +60,7 @@ jobs:
             cypress-${{ runner.os }}-cypress-
 
       - name: Install dependencies
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        # if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn
 
       - name: Start frontend then test
