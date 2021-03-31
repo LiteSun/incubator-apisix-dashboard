@@ -59,6 +59,8 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit == 'true'
         run: |
          ls
+         cd ..
+         ls
          mv -f node_modules /web/node_modules
 
       - name: Install dependencies
