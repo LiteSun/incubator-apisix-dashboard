@@ -14,25 +14,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package route_online_debug
+import React from 'react';
+import type { FormInstance } from 'antd/es/form';
+import { Form, Input } from 'antd';
 
-import (
-	"testing"
-	"time"
+type Props = {
+  form: FormInstance;
+  ref?: any;
+};
 
-	"github.com/onsi/ginkgo"
-	"github.com/onsi/gomega"
+export const FORM_ITEM_LAYOUT = {
+  labelCol: {
+    span: 4,
+  },
+  wrapperCol: {
+    span: 8
+  },
+};
 
-	"github.com/apisix/manager-api/test/e2enew/base"
-)
-
-func TestRoute(t *testing.T) {
-	gomega.RegisterFailHandler(ginkgo.Fail)
-	ginkgo.RunSpecs(t, "route online debug suite")
+const BasicAuth: React.FC<Props> = ({ form }) => {
+  return (
+    <Form
+      form={form}
+      {...FORM_ITEM_LAYOUT}
+    >
+      <Form.Item
+        label="username"
+        name="username"
+        required
+      >
+        <Input></Input>
+      </Form.Item>
+      <Form.Item
+        label="password"
+        name="password"
+        required
+      >
+        <Input></Input>
+      </Form.Item>
+    </Form>
+  );
 }
 
-var _ = ginkgo.AfterSuite(func() {
-	base.CleanResource("routes")
-	base.CleanResource("consumers")
-	time.Sleep(base.SleepTime)
-})
+export default BasicAuth;

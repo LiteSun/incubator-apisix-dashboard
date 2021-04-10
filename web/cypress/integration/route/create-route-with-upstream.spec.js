@@ -41,6 +41,7 @@ context('Create Route with Upstream', () => {
     cy.contains('Route').click();
     cy.contains('Create').click();
 
+    cy.contains('Next').click().click();
     cy.get(this.domSelector.name).type(this.data.routeName);
     cy.contains('Next').click();
     // should disable Upstream input boxes after selecting an existing upstream
@@ -67,7 +68,7 @@ context('Create Route with Upstream', () => {
     cy.get(this.domSelector.nameSelector).type(this.data.routeName);
 
     cy.contains('Search').click();
-    cy.contains(this.data.routeName).siblings().contains('Edit').click();
+    cy.contains(this.data.routeName).siblings().contains('Configure').click();
 
     cy.get(this.domSelector.name).should('value', this.data.routeName);
     cy.contains('Next').click({ force: true });
@@ -95,7 +96,7 @@ context('Create Route with Upstream', () => {
     cy.get(this.domSelector.nameSelector).type(this.data.routeName);
     cy.contains('Search').click();
 
-    cy.contains(this.data.routeName).siblings().contains('Edit').click();
+    cy.contains(this.data.routeName).siblings().contains('Configure').click();
     // ensure it has already changed to edit page
     cy.get(this.domSelector.name).should('value', this.data.routeName);
     cy.contains('Next').click({ force: true });
@@ -106,8 +107,11 @@ context('Create Route with Upstream', () => {
     cy.visit('/routes/list');
     cy.get(this.domSelector.nameSelector).type(this.data.routeName);
     cy.contains('Search').click();
-    cy.contains(this.data.routeName).siblings().contains('Delete').click();
-    cy.contains('button', 'Confirm').click();
+    cy.contains(this.data.routeName).siblings().contains('More').click();
+    cy.contains('Delete').click();
+    cy.get(this.domSelector.deleteAlert).should('be.visible').within(() => {
+      cy.contains('OK').click();
+    });
     cy.get(this.domSelector.notification).should('contain', this.data.deleteRouteSuccess);
 
     cy.visit('/');

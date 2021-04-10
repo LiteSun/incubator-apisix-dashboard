@@ -16,7 +16,7 @@
  */
 /* eslint-disable no-undef */
 
-context('Create Edit and Delete PluginTemplate', () => {
+context('Create Configure and Delete PluginTemplate', () => {
   const timeout = 5000;
   beforeEach(() => {
     cy.login();
@@ -29,6 +29,7 @@ context('Create Edit and Delete PluginTemplate', () => {
     cy.visit('/');
     cy.contains('Route').click();
     cy.get(this.domSelector.empty).should('be.visible');
+    cy.contains('Advanced').should('be.visible').click();
     cy.contains('Plugin Template Config').should('be.visible').click();
     cy.get(this.domSelector.empty).should('be.visible');
     cy.contains('Create').click();
@@ -39,13 +40,14 @@ context('Create Edit and Delete PluginTemplate', () => {
       force: true
     });
     cy.focused(this.domSelector.drawer).should('exist');
-    cy.get(this.domSelector.drawer, {
-      timeout
-    }).within(() => {
-      cy.get(this.domSelector.disabledSwitcher).click({
-        force: true,
-      });
+
+    cy.get(this.domSelector.codeMirrorMode).click();
+    cy.get(this.domSelector.selectDropdown).should('be.visible');
+    cy.get(this.domSelector.selectJSON).click();
+    cy.get(this.domSelector.disabledSwitcher).click({
+      force: true,
     });
+
     cy.contains('Submit').click();
     cy.contains('Next').click();
     cy.contains('Submit').click();
@@ -57,7 +59,7 @@ context('Create Edit and Delete PluginTemplate', () => {
     cy.get(this.domSelector.refresh).click();
     cy.get(this.domSelector.descriptionSelector).type(this.data.pluginTemplateName);
     cy.contains('button', 'Search').click();
-    cy.contains(this.data.pluginTemplateName).siblings().contains('Edit').click();
+    cy.contains(this.data.pluginTemplateName).siblings().contains('Configure').click();
 
     cy.get(this.domSelector.description).clear().type(this.data.pluginTemplateName2);
     cy.contains('Next').click();

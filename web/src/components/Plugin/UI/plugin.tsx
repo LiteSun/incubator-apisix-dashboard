@@ -14,25 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package route_online_debug
+import React from 'react';
+import { FormInstance } from 'antd/es/form';
+import { Empty } from 'antd';
+import { useIntl } from 'umi';
 
-import (
-	"testing"
-	"time"
+import BasicAuth from './basic-auth'
 
-	"github.com/onsi/ginkgo"
-	"github.com/onsi/gomega"
-
-	"github.com/apisix/manager-api/test/e2enew/base"
-)
-
-func TestRoute(t *testing.T) {
-	gomega.RegisterFailHandler(ginkgo.Fail)
-	ginkgo.RunSpecs(t, "route online debug suite")
+type Props = {
+  name: string,
+  form: FormInstance,
+  renderForm: boolean
 }
 
-var _ = ginkgo.AfterSuite(func() {
-	base.CleanResource("routes")
-	base.CleanResource("consumers")
-	time.Sleep(base.SleepTime)
-})
+export const PLUGIN_UI_LIST = ['basic-auth',];
+
+export const PluginForm: React.FC<Props> = ({ name, renderForm, form }) => {
+
+  const { formatMessage } = useIntl();
+
+  if (!renderForm) { return <Empty description={formatMessage({ id: 'component.global.noConfigurationRequired' })} /> };
+
+  switch (name) {
+    case 'basic-auth':
+      return <BasicAuth form={form} />
+    default:
+      return null;
+  }
+}

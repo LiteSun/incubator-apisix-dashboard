@@ -14,25 +14,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package route_online_debug
-
-import (
-	"testing"
-	"time"
-
-	"github.com/onsi/ginkgo"
-	"github.com/onsi/gomega"
-
-	"github.com/apisix/manager-api/test/e2enew/base"
-)
-
-func TestRoute(t *testing.T) {
-	gomega.RegisterFailHandler(ginkgo.Fail)
-	ginkgo.RunSpecs(t, "route online debug suite")
-}
-
-var _ = ginkgo.AfterSuite(func() {
-	base.CleanResource("routes")
-	base.CleanResource("consumers")
-	time.Sleep(base.SleepTime)
-})
+export { PLUGIN_UI_LIST, PluginForm } from './plugin';
